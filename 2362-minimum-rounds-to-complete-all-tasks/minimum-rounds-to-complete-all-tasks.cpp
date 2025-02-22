@@ -10,15 +10,11 @@ public:
             if(val==1){
                 return -1;
             }else{
-                if(val==2) ans++;
-                else if(val==3) ans++;
+                if(val%3==0){
+                    ans+=val/3;
+                }
                 else{
-                    if(val%3==0){
-                        ans+=val/3;
-                    }
-                    else{
-                        ans+=val/3+1;
-                    }
+                    ans+=val/3+1;
                 }
             }
         }
