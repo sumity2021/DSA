@@ -18,7 +18,7 @@ public:
     }
     int coinChange(vector<int>& coins, int amount) {
         vector<int>dp(amount+1,-1);
-        //sort(coins.begin(),coins.end());
+        sort(coins.begin(),coins.end());
         int res=f(coins,amount,dp);
         return (res==INT_MAX)? -1:res;
     }
