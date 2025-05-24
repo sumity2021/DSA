@@ -1,6 +1,9 @@
 class Solution {
 public:
     int matchPlayersAndTrainers(vector<int>& players, vector<int>& trainers) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         int n=players.size();
         int m=trainers.size();
         sort(players.begin(),players.end());
