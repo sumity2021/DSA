@@ -15,17 +15,17 @@ public:
         if (2 * freq[mostfreq] - 1 > n) return "";
 
         int i = 0;
-        while (freq[mostfreq]) {
+        while (freq[mostfreq]--) {
             s[i] = 'a' + mostfreq;
             i += 2;
-            freq[mostfreq]--;
         }
 
         for (int j = 0; j < 26; j++) {
-            while (freq[j]--) {
+            while (freq[j]>0) {
                 if (i >= n) i = 1;
                 s[i] = 'a' + j;
                 i += 2;
+                freq[j]--;
             }
         }
 
