@@ -6,4 +6,4 @@ LEFT JOIN (
     FROM activity
     GROUP BY player_id
 ) b
-ON a.player_id = b.player_id AND a.event_date = DATE_ADD(b.first_login, INTERVAL 1 DAY);
+ON a.player_id = b.player_id AND DATEDIFF(a.event_date,b.first_login)=1;
