@@ -10,21 +10,10 @@ public:
 
     }
     int ladderLength(string b, string e, vector<string>& w) {
-        unordered_map<string, vector<string>>adj;
         w.push_back(b);
-        int n=w.size();
-        for(int u=0; u<n; u++){
-            for(int v=u+1; v<n; v++){
-                if(check(w[u],w[v])){
-                    adj[w[u]].push_back(w[v]);
-                    adj[w[v]].push_back(w[u]);
-                }
-            }
-        }
         queue<pair<string,int>>q;
-        unordered_set<string>vis;
+        unordered_set<string>all(w.begin(),w.end());
         q.push({b,1});
-        vis.insert(b);
         while(!q.empty()){
             auto node=q.front();
             q.pop();
@@ -33,11 +22,17 @@ public:
             if(u==e){
                 return wt;
             }
-            for(string v : adj[u]){
-                if(!vis.count(v)){
-                    q.push({v,wt+1});
-                    vis.insert(v);
+            for(int i=0; i<u.size(); i++){
+                char orig=u[i];
+                for(char ch ='a'; ch<='z'; ch++){
+                    if(orig==ch) continue;
+                    u[i]=ch;
+                    if(all.count(u)){
+                        q.push({u,wt+1});
+                        all.erase(u);
+                    }
                 }
+                u[i]=orig;
             }
             
         }
