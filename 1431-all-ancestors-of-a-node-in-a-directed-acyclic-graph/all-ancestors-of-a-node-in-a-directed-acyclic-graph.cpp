@@ -9,7 +9,7 @@ public:
             adj[u].push_back(v);
             indegree[v]++;
         }
-        vector<set<int>>temp(n);
+        vector<unordered_set<int>>temp(n);
         queue<int>q;
         for(int i=0; i<n; i++){
             if(indegree[i]==0) q.push(i);
@@ -19,10 +19,11 @@ public:
             q.pop();
             for(int v : adj[u]){
                 indegree[v]--;
+                temp[v].insert(u);
                 for(int i : temp[u]){
                     temp[v].insert(i);
                 }
-                temp[v].insert(u);
+                
                 if(indegree[v]==0){
                     q.push(v);
                 }
@@ -31,8 +32,10 @@ public:
         vector<vector<int>>ans(n);
         for(int i=0; i<n; i++ ){
             if(!temp[i].size()) continue;
-            for(int v : temp[i]){
-                ans[i].push_back(v);
+            for(int node=0; node<n; node++){
+                if(temp[i].count(node)){
+                    ans[i].push_back(node);
+                }
             }
         }
         return ans;
