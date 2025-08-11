@@ -1,9 +1,11 @@
 class Dsu{
     vector<int>par;
-    vector<int>size;
+    vector<int>ele;
+    int sz;
 public:
     Dsu(int n){
-        size.resize(n,1);
+        sz=n;
+        ele.resize(n,1);
         for(int i=0; i<n; i++) par.push_back(i);
     }
     int find_par(int u){
@@ -14,20 +16,17 @@ public:
         int upu=find_par(u);
         int upv=find_par(v);
         if(upu == upv) return;
-        else if(size[upu]>=size[upv]){
+        else if(ele[upu]>=ele[upv]){
             par[upv]=upu;
-            size[upu]+=size[upv];
+            ele[upu]+=ele[upv];
         }else{
             par[upu]=upv;
-            size[upv]+=size[upu];
+            ele[upv]+=ele[upu];
         }
+        sz--;
     }
-    int components(int n){
-        int cnt=0;
-        for(int i=0; i<n; i++){
-            if(i==find_par(i)) cnt++;
-        }
-        return cnt;
+    int size(){
+        return sz;
     }
     
 };
@@ -35,15 +34,13 @@ public:
 class Solution {
     bool check(string s1 , string s2){
         int diff=0;
-        vector<int>pos;
         for(int i=0; i<s1.size(); i++){
             if(s1[i]!=s2[i]){
                 diff++;
-                pos.push_back(i);
                 if(diff>2) return 0;
             }
         }
-        return diff==0 || (s1[pos[0]]==s2[pos[1]] && s1[pos[1]]==s2[pos[0]]);
+        return 1;
     }
 public:
     int numSimilarGroups(vector<string>& strs) {
@@ -54,6 +51,6 @@ public:
                 if(check(strs[i],strs[j])) dsu.union_size(i,j);
             }
         }
-        return dsu.components(n);
+        return dsu.size();
     }
 };
