@@ -1,6 +1,5 @@
 struct Node{
     Node*links[26];
-    bool flag=false;
     int freq=0;
     bool containskey(char ch){
         return links[ch-'a']!=NULL;
@@ -13,12 +12,6 @@ struct Node{
     }
     Node*get(char ch){
         return links[ch-'a'];
-    }
-    void setend(){
-        flag=true;
-    }
-    bool isend(){
-        return flag;
     }
     int char_freq(){
         return freq;
@@ -39,7 +32,6 @@ public:
             node=node->get(word[i]);
             node->inc();
         }
-        node->setend();
     }
     int prefix(string word){
         Node*node=root;
