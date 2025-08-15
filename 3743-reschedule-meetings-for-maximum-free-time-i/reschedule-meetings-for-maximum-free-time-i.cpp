@@ -16,7 +16,7 @@ public:
         int ans=0;
         for(int r=0; r<arr.size(); r++){
             sum+=arr[r];
-            while(r-l+1>k){
+            if(r-l+1>k){
                 sum-=arr[l];
                 l++;
             }
