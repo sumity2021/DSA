@@ -4,12 +4,17 @@ public:
         int n=nums.size();
         sort(nums.begin(),nums.end());
         int ans=0;
-        for(int i=0; i<n-2; i++){
-            for(int j=i+1; j<n-1 && nums[i]!=0; j++){
-                int k=i+2;
-                k=lower_bound(nums.begin()+k,nums.end(),nums[i]+nums[j])-nums.begin();
-                ans+=k-j-1;
-
+        for(int i=n-1; i>=2; i--){
+            int l=0;
+            int r=i-1;
+            while(l<r){
+                int sum=nums[l]+nums[r];
+                if(sum>nums[i]){
+                    ans+=(r-l);
+                    r--;
+                }else{
+                    l++;
+                }
             }
         }
         return ans;
