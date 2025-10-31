@@ -4,11 +4,9 @@ public:
         int n=nums.size();
         set<int>s;
         int ans=1e9;
-        for(int i=0; i<n; i++){
-            if(i>=x){
-                s.insert(nums[i-x]);
-                cout<<nums[i-x]<<" ";
-            }
+        for(int i=x; i<n; i++){
+            
+            s.insert(nums[i-x]);
             auto it1 =s.lower_bound(nums[i]);
             auto it2=s.upper_bound(nums[i]);
             if(it1!=s.end()){
