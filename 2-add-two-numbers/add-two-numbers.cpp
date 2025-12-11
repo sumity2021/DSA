@@ -11,55 +11,41 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode*Dummy=new ListNode();
-        ListNode*first=Dummy;
-        int carry=0;
+        ListNode*head= new ListNode(0);
+        ListNode*tail=head;
+        int c=0;
         while(l1 && l2){
-            int sum=l1->val+l2->val+carry;
-            if(sum>9){
-                sum%=10;
-                carry=1;
-            }else{
-                carry=0;
-            }
-            ListNode*node=new ListNode(sum);
-            first->next=node;
-            first=node;
+            int a=l1->val;
+            int b=l2->val;
+            int sum=a+b+c;
+            c=sum/10;
+            ListNode*newnode=new ListNode(sum%10);
+            head->next=newnode;
+            head=head->next;
             l1=l1->next;
             l2=l2->next;
         }
         while(l1){
-            int sum=l1->val+carry;
-            if(sum>9){
-                sum%=10;
-                carry=1;
-            }else{
-                carry=0;
-            }
-            ListNode*node=new ListNode(sum);
-            first->next=node;
-            first=node;
+            int sum=l1->val+c;
+            c=sum/10;
+            ListNode*newnode=new ListNode(sum%10);
+            head->next=newnode;
+            head=head->next;
             l1=l1->next;
         }
         while(l2){
-            int sum=l2->val+carry;
-            if(sum>9){
-                sum%=10;
-                carry=1;
-            }else{
-                carry=0;
-            }
-            ListNode*node=new ListNode(sum);
-            first->next=node;
-            first=node;
+            int sum=l2->val+c;
+            c=sum/10;
+            ListNode*newnode=new ListNode(sum%10);
+            head->next=newnode;
+            head=head->next;
             l2=l2->next;
         }
-        if(carry){
-            ListNode*node=new ListNode(carry);
-            first->next=node;
-            first=node;
+        if(c!=0){
+            ListNode*newnode=new ListNode(c);
+            head->next=newnode;
+            head=head->next;
         }
-        return Dummy->next;
-
+        return tail->next;
     }
 };
