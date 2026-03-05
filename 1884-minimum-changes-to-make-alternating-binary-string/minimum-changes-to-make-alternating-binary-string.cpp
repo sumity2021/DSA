@@ -2,20 +2,20 @@ class Solution {
 public:
     int minOperations(string s) {
         int n=s.size();
-        if(n==1) return 0;
-        int ans=INT_MAX;
-        for(int i=0; i<=1; i++){
-            char ch=i+'0';
-            int op=0;
-            for(int i=0; i<n; i++){
-                if(s[i]!=ch){
-                    op++;
-                }
-                ch++;
-                ch=(ch-'0')%2+'0';
+        int req_1=0;
+        int req_2=1;
+        int req_cnt_1=0;
+        int req_cnt_2=0;
+        for(int i=0; i<n; i++){
+            if(s[i]!=req_1+'0'){
+                req_cnt_1++;
             }
-            ans=min(op,ans);
+            if(s[i]!=req_2+'0'){
+                req_cnt_2++;
+            }
+            req_1=!req_1;
+            req_2=!req_2;
         }
-        return ans;
+        return min(req_cnt_1,req_cnt_2);
     }
 };
